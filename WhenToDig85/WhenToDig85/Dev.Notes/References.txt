@@ -1,0 +1,5 @@
+﻿http://arteksoftware.com/end-to-end-mvvm-with-xamarin/
+Web service, Automapper, async Sqlite
+
+https://www.mallibone.com/post/xamarin.forms-and-mvvm
+MVVM Light example, async Sqlite
