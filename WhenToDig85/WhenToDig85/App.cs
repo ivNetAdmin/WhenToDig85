@@ -9,8 +9,12 @@ namespace WhenToDig85
 {
     public class App : Application
     {
+        private readonly Locator _locator;
+
         public App()
         {
+            _locator = new Locator();
+
             // The root page of your application
             MainPage = new ContentPage
             {
@@ -25,6 +29,11 @@ namespace WhenToDig85
                     }
                 }
             };
+        }
+
+        public Locator Locator
+        {
+            get { return _locator; }
         }
 
         protected override void OnStart()
