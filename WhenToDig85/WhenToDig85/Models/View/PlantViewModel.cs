@@ -11,19 +11,22 @@ namespace WhenToDig85.Models.View
     public class PlantViewModel : ViewModelBase
     {
         private readonly IPlantService _plantService;
-        ObservableCollection<Plant> Plants { get; set; }
+        public ObservableCollection<string> PlantNames { get; set; }
 
         public PlantViewModel(IPlantService plantService)
         {
             if (plantService == null) throw new ArgumentNullException("plantService");
             _plantService = plantService;
+            Task.Run(() => Init());
         }
 
         public async Task Init()
         {
-            if (Plants != null) return;
+            if (PlantNames != null) return;
 
-            Plants = new ObservableCollection<Plant>(await _plantService.GetPlantList());
+            PlantNames = new ObservableCollection<string>(await _plantService.GetPlantNames());
+            RaisePropertyChanged(() => PlantNames);
+            
         }
     }
 }

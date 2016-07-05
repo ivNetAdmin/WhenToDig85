@@ -8,11 +8,12 @@ using Xamarin.Forms;
 
 namespace WhenToDig85.Views
 {
-    public partial class Plant : ContentPage
+    public partial class PlantView : ContentPage
     {
-        public Plant()
+        public PlantView()
         {
             InitializeComponent();
+            BindingContext = App.Locator.PlantVM;
         }
     }
 }

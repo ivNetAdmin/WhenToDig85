@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using WhenToDig85.Models.View;
 using WhenToDig85.Services;
 
 namespace WhenToDig85
@@ -21,7 +22,7 @@ namespace WhenToDig85
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
        "CA1822:MarkMembersAsStatic",
        Justification = "This non-static member is needed for data binding purposes.")]
-        public PlantViewModel Main
+        public PlantViewModel PlantVM
         {
             get { return ServiceLocator.Current.GetInstance<PlantViewModel>(); }
         }

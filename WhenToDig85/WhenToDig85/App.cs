@@ -2,39 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using WhenToDig85.Views;
 using Xamarin.Forms;
 
 namespace WhenToDig85
 {
     public class App : Application
     {
-        private readonly Locator _locator;
+        private static Locator _locator;
 
         public App()
         {
             _locator = new Locator();
 
             // The root page of your application
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            XAlign = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
-            };
+            MainPage = new NavigationPage(new PlantView());
+            
         }
 
-        public Locator Locator
-        {
-            get { return _locator; }
-        }
+        public static Locator Locator { get { return _locator ?? (_locator = new Locator()); } }
 
         protected override void OnStart()
         {
