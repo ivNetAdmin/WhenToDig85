@@ -3,3 +3,9 @@ Web service, Automapper, async Sqlite
 
 https://www.mallibone.com/post/xamarin.forms-and-mvvm
 MVVM Light example, async Sqlite
+
+https://icons8.com/web-app/new-icons/all
+Android icons
+
+https://ionicons.com
+Android icons
