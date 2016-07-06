@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SQLite.Net.Async;
 
-namespace WhenToDig90.Data
+namespace WhenToDig85.Data
 {
     public class Repository<T> : IRepository<T> where T : class
     {
