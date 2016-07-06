@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WhenToDig85.Controls;
 using WhenToDig85.Models.View;
 using Xamarin.Forms;
 
@@ -18,7 +19,8 @@ namespace WhenToDig85.Views
 
         protected override void OnAppearing()
         {
-           // this.PlantNamePicker.
+            var plantNamePicker = this.FindByName<BindablePicker>("PlantNamePicker");
+            plantNamePicker.SelectedIndex = 0;
             Context.OnAppearing();
             base.OnAppearing();
         }

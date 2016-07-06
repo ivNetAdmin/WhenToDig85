@@ -36,7 +36,7 @@ namespace WhenToDig85.Models.View
             if (PlantNames != null) return;
 
             PlantNames = new ObservableCollection<string>(await _plantService.GetPlantNames());
-            PlantNames.Insert(0, "Select Plant");
+            PlantNames.Insert(0, "Select a plant...");
             RaisePropertyChanged(() => PlantNames);
         }
 
