@@ -6,7 +6,7 @@ using WhenToDig90.Data;
 using WhenToDig90.Droid.Data;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SQLite_Android))]
-namespace WhenToDig90.Droid.Data
+namespace WhenToDig85.Droid.Data
 {
     public class SQLite_Android : ISQLite
     {
