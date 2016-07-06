@@ -20,8 +20,9 @@ namespace WhenToDig85.Views
             _viewModel = (PlantViewModel)BindingContext;
 
             _viewModel.ClearFormCallBackAction = () => ClearForm();
+            _viewModel.UserMessageCallBackAction = () => DisplayUserMessage(_viewModel.UserMessage);
         }
-
+      
         public void ClearButtonClicked(object sender, EventArgs args)
         {
             ClearForm();
@@ -47,6 +48,14 @@ namespace WhenToDig85.Views
             this.FindByName<Entry>("PlantTypeEntry").Text = string.Empty;
             this.FindByName<Entry>("PlantSowEntry").Text = string.Empty;
             this.FindByName<Entry>("PlantHarvestEntry").Text = string.Empty;
+            this.FindByName<Label>("UserMessage").Text = string.Empty;
+        }
+
+        private void DisplayUserMessage(string userMessage)
+        {
+            this.FindByName<Label>("UserMessage").TextColor = Color.Aqua;
+            if (userMessage.IndexOf("Error") != -1) this.FindByName<Label>("UserMessage").TextColor = Color.Red;
+            this.FindByName<Label>("UserMessage").Text = userMessage;
         }
 
     }
