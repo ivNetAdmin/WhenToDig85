@@ -31,13 +31,13 @@
               HorizontalOptions="FillAndExpand"
               SelectedItem="{Binding PlantName}" />
             <Image Source="plant_name.png" Grid.Column="0" Grid.Row="1"/>
-            <Entry Grid.Column="1" Grid.Row="1"  Placeholder="Plant name"/>
+            <Entry x:Name="PlantNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Plant name"/>
             <Image Source="plant_type.png" Grid.Column="0" Grid.Row="2"/>
-            <Entry Grid.Column="1" Grid.Row="2"  Placeholder="Plant type (eg. Earlies)"/>
+            <Entry x:Name="PlantTypeEntry" Grid.Column="1" Grid.Row="2"  Placeholder="Plant type (eg. Earlies)"/>
             <Image Source="sow.png" Grid.Column="0" Grid.Row="3"/>
-            <Entry Grid.Column="1" Grid.Row="3" Placeholder="Sow (eg. Apr, May, Jun)"/>
+            <Entry x:Name="PlantSowEntry" Grid.Column="1" Grid.Row="3" Placeholder="Sow (eg. Apr, May, Jun)"/>
             <Image Source="harvest.png" Grid.Column="0" Grid.Row="4"/>
-            <Entry Grid.Column="1" Grid.Row="4" Placeholder="Harvest (eg. Jul, Aug)"/>
+            <Entry x:Name="PlantHarvestEntry" Grid.Column="1" Grid.Row="4" Placeholder="Harvest (eg. Jul, Aug)"/>
             <Grid  Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -47,8 +47,8 @@
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
-              <Button Text="Save" Grid.Column="0" Grid.Row="0"/>
-              <Button Text="Clear" Grid.Column="2" Grid.Row="0"/>
+              <Button Text="Save" Grid.Column="0" Grid.Row="0" Command="{Binding SavePlantCommand}"/>
+              <Button Text="Clear" Grid.Column="2" Grid.Row="0" Clicked="ClearButtonClicked"/>
             </Grid>
           </Grid>
         </StackLayout.Children>

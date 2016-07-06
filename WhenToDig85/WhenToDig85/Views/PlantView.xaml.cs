@@ -11,16 +11,26 @@ namespace WhenToDig85.Views
 {
     public partial class PlantView : ContentPage
     {
+        private PlantViewModel _viewModel;
         public PlantView()
         {
             InitializeComponent();
             BindingContext = App.Locator.PlantVM;
+
+            _viewModel = (PlantViewModel)BindingContext;
+
+            _viewModel.ClearFormCallBackAction = () => ClearForm();
         }
 
+        public void ClearButtonClicked(object sender, EventArgs args)
+        {
+            ClearForm();
+        }
+        
         protected override void OnAppearing()
         {
-            var plantNamePicker = this.FindByName<BindablePicker>("PlantNamePicker");
-            plantNamePicker.SelectedIndex = 0;
+            ClearForm();
+
             Context.OnAppearing();
             base.OnAppearing();
         }
@@ -29,5 +39,15 @@ namespace WhenToDig85.Views
         {
             get { return (IPageLifeCycleEvents)BindingContext; }
         }
+
+        private void ClearForm()
+        {
+            this.FindByName<BindablePicker>("PlantNamePicker").SelectedIndex = 0;
+            this.FindByName<Entry>("PlantNameEntry").Text = string.Empty;
+            this.FindByName<Entry>("PlantTypeEntry").Text = string.Empty;
+            this.FindByName<Entry>("PlantSowEntry").Text = string.Empty;
+            this.FindByName<Entry>("PlantHarvestEntry").Text = string.Empty;
+        }
+
     }
 }

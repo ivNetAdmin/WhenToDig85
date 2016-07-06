@@ -1,8 +1,10 @@
 ﻿
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WhenToDig85.Models.Data;
 using WhenToDig85.Services;
 
@@ -17,8 +19,19 @@ namespace WhenToDig85.Models.View
         {
             if (plantService == null) throw new ArgumentNullException("plantService");
             _plantService = plantService;
+
+            ClearFormCallBackAction = () => { };
+
+            SavePlantCommand = new RelayCommand(()=> {
+
+                ClearFormCallBackAction();
+            });
+
             Task.Run(() => Init());
         }
+
+        public Action ClearFormCallBackAction { get; set; }
+        public ICommand SavePlantCommand { get; set; }
 
         private string _plantName;
         public string PlantName
