@@ -12,6 +12,7 @@ namespace WhenToDig85.Services
         //Task<IEnumerable<Plant>> GetPlantList();
         Task<IEnumerable<string>> GetPlantNames();
         Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime);
+        Task<Plant> GetPlantByName(string value);
     }
 
     public class PlantService : Base, IPlantService
@@ -21,6 +22,13 @@ namespace WhenToDig85.Services
         public PlantService()
         {
             _plantResporitory = new Repository<Plant>();
+        }
+
+        public async Task<Plant> GetPlantByName(string value)
+        {
+            var slug = MakeSlug(new[] { value });
+            var plants = await _plantResporitory.Get<Plant>(x => x.Slug == slug);
+            return plants.Count > 0 ? plants[0] : null;
         }
 
         public async Task<IEnumerable<string>> GetPlantNames()
@@ -33,7 +41,7 @@ namespace WhenToDig85.Services
                 plantNames.Add(
                     string.Format("{0}{1}",
                     plant.Name,
-                    String.IsNullOrEmpty(plant.Type)?string.Empty:string.Format("({0}, plant.Type)")
+                    String.IsNullOrEmpty(plant.Type) ? string.Empty : string.Format(" ({0})", plant.Type)
                     ));
             }
             plantNames.Sort();

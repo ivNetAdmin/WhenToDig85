@@ -30,7 +30,8 @@
               Grid.Column="1"
               ItemsSource="{Binding PlantNames}"
               HorizontalOptions="FillAndExpand"
-              SelectedItem="{Binding PlantSelection}" />
+              SelectedItem="{Binding PlantSelection}"
+              />
             <Image Source="plant_name.png" Grid.Column="0" Grid.Row="1"/>
             <Entry x:Name="PlantNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Plant name" Text="{Binding PlantName}"/>
             <Image Source="plant_type.png" Grid.Column="0" Grid.Row="2"/>

@@ -68,6 +68,12 @@ namespace WhenToDig85.Models.View
             {
                 _plantSelection = value;
                 RaisePropertyChanged(() => PlantSelection);
+                if (!string.IsNullOrEmpty(_plantSelection) && _plantSelection != _plantSelectionPrompt)
+                {
+                    var plant = GetPlantByName(value);
+                    PlantName = plant.Name;
+                    PlantType = plant.Type;
+                }
             }
         }
 
@@ -152,5 +158,12 @@ namespace WhenToDig85.Models.View
             RaisePropertyChanged(() => PlantNames);
             ClearFormCallBackAction();
         }
+
+        private Plant GetPlantByName(string value)
+        {
+            Task<Plant> task = _plantService.GetPlantByName(value);
+            return task.Result;
+        }
+
     }
 }
