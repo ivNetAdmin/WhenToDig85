@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WhenToDig85.Controls;
 using WhenToDig85.Models.View;
 using Xamarin.Forms;
@@ -27,7 +23,19 @@ namespace WhenToDig85.Views
         {
             ClearForm();
         }
+
+        public void Name_TextChanged(object sender, EventArgs args)
+        {
+            this.FindByName<Label>("UserMessage").Text = string.Empty;
+        }
+
+        public void Notes_TextChanged(object sender, EventArgs args)
+        {
+            var editor = (Editor)sender;
+            editor.TextColor = editor.Text == "Notes" ? Color.Gray : Color.White;
+        }
         
+
         protected override void OnAppearing()
         {
             ClearForm();
@@ -49,6 +57,7 @@ namespace WhenToDig85.Views
             this.FindByName<Entry>("PlantSowEntry").Text = string.Empty;
             this.FindByName<Entry>("PlantHarvestEntry").Text = string.Empty;
             this.FindByName<Label>("UserMessage").Text = string.Empty;
+            this.FindByName<Editor>("Notes").Text = "Notes";
         }
 
         private void DisplayUserMessage(string userMessage)

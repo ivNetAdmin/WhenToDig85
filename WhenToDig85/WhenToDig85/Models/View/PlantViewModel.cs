@@ -39,7 +39,7 @@ namespace WhenToDig85.Models.View
                     else
                     {
                         UserMessage = _plantListUpdatedMessage;
-                        await _plantService.Save(PlantName, PlantType, SowTime, HarvestTime);                        
+                        await _plantService.Save(PlantName, PlantType, SowTime, HarvestTime, Notes == "Notes" ? string.Empty : Notes);                      
                         GetPlantNames();                                           
                     }
                 }
@@ -120,6 +120,17 @@ namespace WhenToDig85.Models.View
             }
         }
 
+        private string _notes;
+        public string Notes
+        {
+            get { return _notes; }
+            set
+            {
+                _notes = value;
+                RaisePropertyChanged(() => Notes);
+            }
+        }
+
         private string _userMessage;
         public string UserMessage
         {
@@ -153,6 +164,7 @@ namespace WhenToDig85.Models.View
                 PlantType = plant.Type;
                 SowTime = plant.SowTime;
                 HarvestTime = plant.HarvestTime;
+                Notes = string.IsNullOrEmpty(plant.Notes) ? "Notes" : plant.Notes;
             }
             catch (Exception ex)
             {
