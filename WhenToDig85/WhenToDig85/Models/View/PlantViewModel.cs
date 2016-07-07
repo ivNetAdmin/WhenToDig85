@@ -17,6 +17,7 @@ namespace WhenToDig85.Models.View
         private const string _missingPlantNameMessage = "ERROR! You must a plant name...";
 
         private readonly IPlantService _plantService;
+
         public ObservableCollection<string> PlantNames { get; set; }
 
         public PlantViewModel(IPlantService plantService)
@@ -51,7 +52,7 @@ namespace WhenToDig85.Models.View
                     UserMessageCallBackAction();
                 }
             });
-
+           
             Task.Run(() => Init());
         }
 
@@ -70,9 +71,7 @@ namespace WhenToDig85.Models.View
                 RaisePropertyChanged(() => PlantSelection);
                 if (!string.IsNullOrEmpty(_plantSelection) && _plantSelection != _plantSelectionPrompt)
                 {
-                    var plant = GetPlantByName(value);
-                    PlantName = plant.Name;
-                    PlantType = plant.Type;
+                    Task.Run(() => GetPlantDetails(value));
                 }
             }
         }
@@ -143,6 +142,24 @@ namespace WhenToDig85.Models.View
                 UserMessage = string.Format("ERROR! {0}", ex.Message);           
                 UserMessageCallBackAction();
             }
+        }
+
+        private async Task GetPlantDetails(string value)
+        {
+            try
+            {
+                var plant = await _plantService.GetPlantByName(value);
+                PlantName = plant.Name;
+                PlantType = plant.Type;
+                SowTime = plant.SowTime;
+                HarvestTime = plant.HarvestTime;
+            }
+            catch (Exception ex)
+            {
+                UserMessage = string.Format("ERROR! {0}", ex.Message);
+                UserMessageCallBackAction();
+            }
+
         }
 
         public void OnAppearing()
