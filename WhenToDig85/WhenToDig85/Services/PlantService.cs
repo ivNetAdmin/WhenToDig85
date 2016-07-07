@@ -30,7 +30,11 @@ namespace WhenToDig85.Services
 
             foreach (var plant in plants)
             {
-                plantNames.Add(plant.Name);
+                plantNames.Add(
+                    string.Format("{0}{1}",
+                    plant.Name,
+                    String.IsNullOrEmpty(plant.Type)?string.Empty:string.Format("({0}, plant.Type)")
+                    ));
             }
             plantNames.Sort();
 
