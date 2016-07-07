@@ -16,7 +16,7 @@
     <ScrollView Orientation="Vertical" VerticalOptions="Start">
       <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
         <StackLayout.Children>
-          <Grid>
+          <Grid Padding="10">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto"/>
               <ColumnDefinition Width="*"/>
@@ -43,12 +43,8 @@
               HorizontalOptions="FillAndExpand"
               SelectedItem="{Binding PlantSelection}"
               />
-            <StackLayout Spacing="10" VerticalOptions = "Start" Grid.Column="0" Grid.Row="1" BackgroundColor="Red">
-              <StackLayout.Children>
-                <Image Source="plant_name.png" />
-              </StackLayout.Children>
-            </StackLayout>
-
+                  
+            <Image Source="plant_name.png" Grid.Column="0" Grid.Row="1"/>
             <Entry x:Name="PlantNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Plant name" Text="{Binding PlantName}" TextChanged="Name_TextChanged"/>
             <Image Source="plant_type.png" Grid.Column="0" Grid.Row="2"/>
             <Entry x:Name="PlantTypeEntry" Grid.Column="1" Grid.Row="2"  Placeholder="Plant type (eg. Earlies)" Text="{Binding PlantType}"/>

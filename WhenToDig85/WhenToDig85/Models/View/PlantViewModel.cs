@@ -12,7 +12,7 @@ namespace WhenToDig85.Models.View
 {
     public class PlantViewModel : ViewModelBase, IPageLifeCycleEvents
     {
-        private const string _plantSelectionPrompt = "Select or Enter new plant details...";
+        private const string _plantSelectionPrompt = "Select or Enter plant details...";
         private const string _plantListUpdatedMessage = "Plant list updated...";
         private const string _missingPlantNameMessage = "ERROR! You must a plant name...";
 
