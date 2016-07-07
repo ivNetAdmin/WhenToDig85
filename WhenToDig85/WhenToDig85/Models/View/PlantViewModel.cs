@@ -12,8 +12,7 @@ namespace WhenToDig85.Models.View
 {
     public class PlantViewModel : ViewModelBase, IPageLifeCycleEvents
     {
-        private const string _plantSelectionPrompt = "Select or Enter plant details...";
-        private const string _plantListUpdatedMessage = "Plant list updated...";
+        private const string _plantSelectionPrompt = "Select or Enter plant details...";       
         private const string _missingPlantNameMessage = "ERROR! You must a plant name...";
 
         private readonly IPlantService _plantService;
@@ -37,8 +36,7 @@ namespace WhenToDig85.Models.View
                         UserMessage = _missingPlantNameMessage;
                     }
                     else
-                    {
-                        UserMessage = _plantListUpdatedMessage;
+                    {                       
                         await _plantService.Save(PlantName, PlantType, SowTime, HarvestTime, Notes == "Notes" ? string.Empty : Notes);                      
                         GetPlantNames();                                           
                     }

@@ -23,6 +23,7 @@ namespace WhenToDig85.Data
         {
             using (await Mutex.LockAsync().ConfigureAwait(false))
             {
+                //await _connection.DeleteAllAsync<T>().ConfigureAwait(false);
                 await _connection.CreateTableAsync<T>().ConfigureAwait(false);
             } 
         }
@@ -85,7 +86,13 @@ namespace WhenToDig85.Data
 
         public async Task<int> Update(T entity)
         {
-            return await _connection.UpdateAsync(entity);
+            int entityId = 0;
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                entityId = await _connection.UpdateAsync(entity).ConfigureAwait(false);
+            }
+            return entityId;
+           // return await _connection.UpdateAsync(entity);
         }
 
         public async Task<int> Delete(T entity)
