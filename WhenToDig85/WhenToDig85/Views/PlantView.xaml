@@ -4,6 +4,14 @@
              x:Class="WhenToDig85.Views.PlantView"
              xmlns:custom="clr-namespace:WhenToDig85.Controls;assembly=WhenToDig85">
 
+  <ContentPage.ToolbarItems  VerticalOptions = "Start">
+    <ToolbarItem Icon="calendar.png" />
+    <ToolbarItem Icon="job.png" />
+    <ToolbarItem Icon="review.png" />
+    <ToolbarItem Icon="plant.png" />
+    <ToolbarItem Icon="variety.png" />
+  </ContentPage.ToolbarItems>
+  
   <ContentPage.Content>
     <ScrollView Orientation="Vertical" VerticalOptions="Start">
       <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
