@@ -34,11 +34,9 @@
             <Image Source="plant_name.png" Grid.Column="0" Grid.Row="1"/>
             <Entry x:Name="PlantNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Plant name" Text="{Binding PlantName}"/>
             <Image Source="plant_type.png" Grid.Column="0" Grid.Row="2"/>
-            <Entry x:Name="PlantTypeEntry" Grid.Column="1" Grid.Row="2"  Placeholder="Plant type (eg. Earlies)"/>
-            <Image Source="sow.png" Grid.Column="0" Grid.Row="3"/>
-            <Entry x:Name="PlantSowEntry" Grid.Column="1" Grid.Row="3" Placeholder="Sow (eg. Apr, May, Jun)"/>
-            <Image Source="harvest.png" Grid.Column="0" Grid.Row="4"/>
-            <Entry x:Name="PlantHarvestEntry" Grid.Column="1" Grid.Row="4" Placeholder="Harvest (eg. Jul, Aug)"/>
+            <Entry x:Name="PlantTypeEntry" Grid.Column="1" Grid.Row="2"  Placeholder="Plant type (eg. Earlies)" Text="{Binding PlantType}"/><Image Source="sow.png" Grid.Column="0" Grid.Row="3"/>
+            <Entry x:Name="PlantSowEntry" Grid.Column="1" Grid.Row="3" Placeholder="Sow (eg. Apr, May, Jun)" Text="{Binding SowTime}"/><Image Source="harvest.png" Grid.Column="0" Grid.Row="4"/>
+            <Entry x:Name="PlantHarvestEntry" Grid.Column="1" Grid.Row="4" Placeholder="Harvest (eg. Jul, Aug)" Text="{Binding HarvestTime}"/>
             <Grid  Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

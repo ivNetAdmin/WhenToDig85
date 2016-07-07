@@ -1,36 +1,67 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WhenToDig85.Data;
 using WhenToDig85.Models.Data;
 
 namespace WhenToDig85.Services
 {
     public interface IPlantService
     {
-        Task<IEnumerable<Plant>> GetPlantList();
+        //Task<IEnumerable<Plant>> GetPlantList();
         Task<IEnumerable<string>> GetPlantNames();
+        Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime);
     }
 
-    public class PlantService : IPlantService
+    public class PlantService : Base, IPlantService
     {
-        public Task<IEnumerable<string>> GetPlantNames()
+        private IRepository<Plant> _plantResporitory;
+
+        public PlantService()
         {
-            return Task.Run(() => GetAllNames());
+            _plantResporitory = new Repository<Plant>();
         }
 
-        public Task<IEnumerable<Plant>> GetPlantList()
+        public async Task<IEnumerable<string>> GetPlantNames()
         {
-            return Task.Run(() => GetAll());
+            var  plantNames = new List<string>();
+            var plants = await _plantResporitory.Get<Plant>();
+
+            foreach (var plant in plants)
+            {
+                plantNames.Add(plant.Name);
+            }
+            plantNames.Sort();
+
+            return plantNames;
         }
 
-        private IEnumerable<Plant> GetAll()
+        public async Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime)
         {
-            return new List<Plant> { new Plant { Name  = "Carrot" } };
-        }
+            var slug = MakeSlug(new[] { plantName, plantType });
+            var plants = await _plantResporitory.Get<Plant>(x => x.Slug == slug);
+            var plantId = 0;
+            if (plants.Count == 0)
+            {
+                plantId = await _plantResporitory.Insert(new Plant
+                {
+                    Name = plantName,
+                    Type = plantType,
+                    Slug = slug,
+                    SowTime = sowTime,
+                    HarvestTime = harvestTime
+                });
+            }
+            else
+            {
+                var existingPlant = plants[0];
+                existingPlant.SowTime = sowTime;
+                existingPlant.HarvestTime = harvestTime;
+                plantId = await _plantResporitory.Update(existingPlant);
+            }
 
-        private IEnumerable<string> GetAllNames()
-        {
-            return new List<string> { "Carrot" };
+            return plantId;
         }
     }
 }

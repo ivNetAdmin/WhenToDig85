@@ -13,7 +13,7 @@ namespace WhenToDig85.Models.View
     public class PlantViewModel : ViewModelBase, IPageLifeCycleEvents
     {
         private const string _plantSelectionPrompt = "Select or Enter new plant details...";
-        private const string _newPlantAddedMessage = "New plant added...";
+        private const string _plantListUpdatedMessage = "Plant list updated...";
         private const string _missingPlantNameMessage = "ERROR! You must a plant name...";
 
         private readonly IPlantService _plantService;
@@ -27,18 +27,29 @@ namespace WhenToDig85.Models.View
             ClearFormCallBackAction = () => { };
             UserMessageCallBackAction = () => { };
 
-            SavePlantCommand = new RelayCommand(() =>
+            SavePlantCommand = new RelayCommand(async () =>
             {
-                UserMessage = _newPlantAddedMessage;
-                if (string.IsNullOrEmpty(_plantName))
+                try
                 {
-                    UserMessage = _missingPlantNameMessage;
+                    if (string.IsNullOrEmpty(_plantName))
+                    {
+                        UserMessage = _missingPlantNameMessage;
+                    }
+                    else
+                    {
+                        UserMessage = _plantListUpdatedMessage;
+                        await _plantService.Save(PlantName, PlantType, SowTime, HarvestTime);                        
+                        GetPlantNames();                                           
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    ClearFormCallBackAction();
+                    UserMessage = string.Format("ERROR! {0}", ex.Message);
                 }
-                UserMessageCallBackAction();
+                finally
+                {
+                    UserMessageCallBackAction();
+                }
             });
 
             Task.Run(() => Init());
@@ -48,7 +59,7 @@ namespace WhenToDig85.Models.View
         public Action UserMessageCallBackAction { get; set; }
         
         public ICommand SavePlantCommand { get; set; }
-       
+
         private string _plantSelection;
         public string PlantSelection
         {
@@ -71,6 +82,39 @@ namespace WhenToDig85.Models.View
             }
         }
 
+        private string _plantType;
+        public string PlantType
+        {
+            get { return _plantType; }
+            set
+            {
+                _plantType = value;
+                RaisePropertyChanged(() => PlantType);
+            }
+        }
+
+        private string _sowTime;
+        public string SowTime
+        {
+            get { return _sowTime; }
+            set
+            {
+                _sowTime = value;
+                RaisePropertyChanged(() => SowTime);
+            }
+        }
+
+        private string _harvestTime;
+        public string HarvestTime
+        {
+            get { return _harvestTime; }
+            set
+            {
+                _harvestTime = value;
+                RaisePropertyChanged(() => HarvestTime);
+            }
+        }
+
         private string _userMessage;
         public string UserMessage
         {
@@ -84,16 +128,29 @@ namespace WhenToDig85.Models.View
 
         public async Task Init()
         {
-            if (PlantNames != null) return;
-
-            PlantNames = new ObservableCollection<string>(await _plantService.GetPlantNames());
-            PlantNames.Insert(0, _plantSelectionPrompt);
-            RaisePropertyChanged(() => PlantNames);
+            try
+            {
+                GetPlantNames();
+            }
+            catch (Exception ex)
+            {
+                UserMessage = string.Format("ERROR! {0}", ex.Message);           
+                UserMessageCallBackAction();
+            }
         }
 
         public void OnAppearing()
         {
 
+        }
+
+        private async void GetPlantNames()
+        {
+            if (PlantNames != null) PlantNames.Clear();
+            PlantNames = new ObservableCollection<string>(await _plantService.GetPlantNames());
+            PlantNames.Insert(0, _plantSelectionPrompt);
+            RaisePropertyChanged(() => PlantNames);
+            ClearFormCallBackAction();
         }
     }
 }

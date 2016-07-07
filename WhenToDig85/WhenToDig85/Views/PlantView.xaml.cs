@@ -54,7 +54,7 @@ namespace WhenToDig85.Views
         private void DisplayUserMessage(string userMessage)
         {
             this.FindByName<Label>("UserMessage").TextColor = Color.Aqua;
-            if (userMessage.IndexOf("Error") != -1) this.FindByName<Label>("UserMessage").TextColor = Color.Red;
+            if (userMessage.IndexOf("ERROR") != -1) this.FindByName<Label>("UserMessage").TextColor = Color.Red;
             this.FindByName<Label>("UserMessage").Text = userMessage;
         }
 

@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SQLite.Net.Async;
+using WhenToDig85.Data;
 
 namespace WhenToDig85.Data
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private SQLiteAsyncConnection _connection;
+        private static readonly AsyncLock Mutex = new AsyncLock();
+        private readonly SQLiteAsyncConnection _connection;
 
         public Repository()
         {
@@ -19,7 +21,10 @@ namespace WhenToDig85.Data
 
         private async void Initialise()
         {
-            await _connection.CreateTableAsync<T>();  
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                await _connection.CreateTableAsync<T>().ConfigureAwait(false);
+            } 
         }
 
         public AsyncTableQuery<T> AsQueryable()
@@ -29,7 +34,12 @@ namespace WhenToDig85.Data
 
         public async Task<List<T>> Get()
         {
-            return await _connection.Table<T>().ToListAsync().ConfigureAwait(false);
+            List<T> entityList = new List<T>();
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                entityList = await _connection.Table<T>().ToListAsync().ConfigureAwait(false);
+            }
+            return entityList;           
         }
 
         public async Task<List<T>> Get<TValue>(Expression<Func<T, bool>> predicate = null, Expression<Func<T, TValue>> orderBy = null)
@@ -55,12 +65,22 @@ namespace WhenToDig85.Data
 
         public async Task<T> Get(Expression<Func<T, bool>> predicate)
         {
-            return await _connection.FindAsync<T>(predicate).ConfigureAwait(false);
+            T task;
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                task = await _connection.FindAsync<T>(predicate).ConfigureAwait(false);
+            }
+            return task;
         }
 
         public async Task<int> Insert(T entity)
         {
-            return await _connection.InsertAsync(entity);
+            int entityId = 0;
+            using (await Mutex.LockAsync().ConfigureAwait(false))
+            {
+                entityId =  await _connection.InsertAsync(entity).ConfigureAwait(false);
+            }
+            return entityId;
         }
 
         public async Task<int> Update(T entity)
@@ -72,5 +92,27 @@ namespace WhenToDig85.Data
         {
             return await _connection.DeleteAsync(entity);
         }
+
+        //public async Task Save(Conference conference)
+        //{
+        //    using (await Mutex.LockAsync().ConfigureAwait(false))
+        //    {
+        //        // Because our conference model is being mapped from the dto,
+        //        // we need to check the database by name, not id
+        //        var existingConference = await _connection.Table<Conference>()
+        //                .Where(x => x.Slug == conference.Slug)
+        //                .FirstOrDefaultAsync();
+
+        //        if (existingConference == null)
+        //        {
+        //            await _connection.InsertAsync(conference).ConfigureAwait(false);
+        //        }
+        //        else
+        //        {
+        //            conference.Id = existingConference.Id;
+        //            await _connection.UpdateAsync(conference).ConfigureAwait(false);
+        //        }
+        //    }
+        //}
     }
 }

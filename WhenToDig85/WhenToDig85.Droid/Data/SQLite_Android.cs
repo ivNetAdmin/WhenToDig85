@@ -2,8 +2,8 @@ using SQLite.Net;
 using SQLite.Net.Async;
 using System;
 using System.IO;
-using WhenToDig90.Data;
-using WhenToDig90.Droid.Data;
+using WhenToDig85.Data;
+using WhenToDig85.Droid.Data;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SQLite_Android))]
 namespace WhenToDig85.Droid.Data
