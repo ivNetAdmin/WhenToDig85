@@ -45,7 +45,8 @@
               />
                   
             <Image Source="plant_name.png" Grid.Column="0" Grid.Row="1"/>
-            <Entry x:Name="PlantNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Plant name" Text="{Binding PlantName}" TextChanged="Name_TextChanged"/>
+            <Entry x:Name="PlantNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Plant name" Text="{Binding PlantName}"/>
+            <!--TextChanged="Name_TextChanged"-->
             <Image Source="plant_type.png" Grid.Column="0" Grid.Row="2"/>
             <Entry x:Name="PlantTypeEntry" Grid.Column="1" Grid.Row="2"  Placeholder="Plant type (eg. Earlies)" Text="{Binding PlantType}"/>
             <Image Source="sow.png" Grid.Column="0" Grid.Row="3"/>

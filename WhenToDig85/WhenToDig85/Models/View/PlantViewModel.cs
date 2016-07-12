@@ -14,6 +14,7 @@ namespace WhenToDig85.Models.View
     {
         private const string _plantSelectionPrompt = "Select or Enter plant details...";       
         private const string _missingPlantNameMessage = "ERROR! You must a plant name...";
+        private const string _updatedPlantMessage = "Plant list updated...";
 
         private readonly IPlantService _plantService;
 
@@ -29,6 +30,8 @@ namespace WhenToDig85.Models.View
 
             SavePlantCommand = new RelayCommand(async () =>
             {
+                UserMessage = _updatedPlantMessage;
+
                 try
                 {
                     if (string.IsNullOrEmpty(_plantName))

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using WhenToDig85.Controls;
 using WhenToDig85.Models.View;
 using Xamarin.Forms;
@@ -24,10 +25,10 @@ namespace WhenToDig85.Views
             ClearForm();
         }
 
-        public void Name_TextChanged(object sender, EventArgs args)
-        {
-            this.FindByName<Label>("UserMessage").Text = string.Empty;
-        }
+        //public void Name_TextChanged(object sender, EventArgs args)
+        //{
+        //    this.FindByName<Label>("UserMessage").Text = string.Empty;
+        //}
 
         public void Notes_TextChanged(object sender, EventArgs args)
         {
@@ -56,16 +57,18 @@ namespace WhenToDig85.Views
             this.FindByName<Entry>("PlantTypeEntry").Text = string.Empty;
             this.FindByName<Entry>("PlantSowEntry").Text = string.Empty;
             this.FindByName<Entry>("PlantHarvestEntry").Text = string.Empty;
-            this.FindByName<Label>("UserMessage").Text = string.Empty;
+            //this.FindByName<Label>("UserMessage").Text = string.Empty;
             this.FindByName<Editor>("Notes").Text = "Notes";
         }
 
         private void DisplayUserMessage(string userMessage)
         {
             this.FindByName<Label>("UserMessage").TextColor = Color.Aqua;
-            if (userMessage.IndexOf("ERROR") != -1) this.FindByName<Label>("UserMessage").TextColor = Color.Red;
+            if (!string.IsNullOrEmpty(userMessage) && userMessage.IndexOf("ERROR") != -1) this.FindByName<Label>("UserMessage").TextColor = Color.Red;
             this.FindByName<Label>("UserMessage").Text = userMessage;
-        }
 
+            //Task.Delay(10000).Wait();
+            //this.FindByName<Label>("UserMessage").Text = string.Empty;
+        }
     }
 }
