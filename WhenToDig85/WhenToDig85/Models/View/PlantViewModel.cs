@@ -29,10 +29,14 @@ namespace WhenToDig85.Models.View
             ClearFormCallBackAction = () => { };
             UserErrorMessageCallBackAction = () => { };
 
+            CalendarCommand = new RelayCommand(async () =>{});
+            JobCommand = new RelayCommand(async () =>{});
+            ReviewCommand = new RelayCommand(async () =>{});
+            PlantCommand = new RelayCommand(async () =>{});
+            VarietyCommand = new RelayCommand(async () =>{Navigation.PushAsync(new VarietyView();});
+
             SavePlantCommand = new RelayCommand(async () =>
             {
-                //UserMessage = _updatedPlantMessage;
-
                 try
                 {
                     if (string.IsNullOrEmpty(_plantName))
@@ -61,6 +65,12 @@ namespace WhenToDig85.Models.View
         public Action ClearFormCallBackAction { get; set; }
         public Action UserErrorMessageCallBackAction { get; set; }
         
+        public ICommand CalendarCommand { get; set; }
+        public ICommand JobCommand { get; set; }
+        public ICommand ReviewCommand { get; set; }
+        public ICommand PlantCommand { get; set; }
+        public ICommand VarietyCommand { get; set; }
+     
         public ICommand SavePlantCommand { get; set; }
      
         private string _plantSelection;
