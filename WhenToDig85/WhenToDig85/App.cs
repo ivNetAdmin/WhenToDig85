@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +13,27 @@ namespace WhenToDig85
     public class App : Application
     {
         private static Locator _locator;
+        public static Locator Locator { get { return _locator ?? (_locator = new Locator()); } }
 
         public App()
         {
-            _locator = new Locator();
+            //_locator = new Locator();
 
+            // Services
             var nav = new NavigationService();
             nav.Configure(Locator.PlantView, typeof(PlantView));
             nav.Configure(Locator.VarietyView, typeof(VarietyView));
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
+
+            var ps = new PlantService();
+            SimpleIoc.Default.Register<IPlantService>(() => ps);
 
             // The root page of your application
-            MainPage = new NavigationPage(new PlantView());
+            var page = new NavigationPage(new PlantView());
+            nav.Initialize(page);
+            MainPage = page;
             
-        }
-
-        public static Locator Locator { get { return _locator ?? (_locator = new Locator()); } }
+        }       
 
         protected override void OnStart()
         {

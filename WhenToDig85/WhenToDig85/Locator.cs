@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using WhenToDig85.Models.View;
 using WhenToDig85.Services;
@@ -16,8 +17,7 @@ namespace WhenToDig85
             SimpleIoc.Default.Register<VarietyViewModel>();
 
 
-            // Services
-            SimpleIoc.Default.Register<IPlantService, PlantService>();
+          
         }
         
         public const string PlantView = "PlantView";

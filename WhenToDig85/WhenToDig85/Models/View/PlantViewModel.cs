@@ -35,10 +35,10 @@ namespace WhenToDig85.Models.View
             ClearFormCallBackAction = () => { };
             UserErrorMessageCallBackAction = () => { };
 
-            CalendarNavigationCommand = new RelayCommand(async () =>{});
-            JobNavigationCommand = new RelayCommand(async () =>{});
-            ReviewNavigationCommand = new RelayCommand(async () =>{});
-            PlantNavigationCommand = new RelayCommand(async () =>{});
+            //CalendarNavigationCommand = new RelayCommand(async () =>{});
+            //JobNavigationCommand = new RelayCommand(async () =>{});
+            //ReviewNavigationCommand = new RelayCommand(async () =>{});
+            //PlantNavigationCommand = new RelayCommand(async () =>{});
             VarietyNavigationCommand =new RelayCommand(() => { _navigationService.NavigateTo(Locator.VarietyView); });
 
             SavePlantCommand = new RelayCommand(async () =>
