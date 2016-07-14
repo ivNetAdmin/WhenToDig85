@@ -62,12 +62,7 @@ namespace WhenToDig85.Models.View
         public Action UserErrorMessageCallBackAction { get; set; }
         
         public ICommand SavePlantCommand { get; set; }
-        public ICommand CalendarNavigationCommand { get; set; }
-        public ICommand JobNavigationCommand { get; set; }
-        public ICommand ReviewNavigationCommand { get; set; }
-        public ICommand PlantNavigationCommand { get; set; }
-        public ICommand VarietyNavigationCommand { get; set; }
-
+     
         private string _plantSelection;
         public string PlantSelection
         {
