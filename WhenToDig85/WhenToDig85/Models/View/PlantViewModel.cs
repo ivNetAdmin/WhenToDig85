@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WhenToDig85.Helpers;
 using WhenToDig85.Models.Data;
 using WhenToDig85.Services;
 
@@ -12,9 +13,9 @@ namespace WhenToDig85.Models.View
 {
     public class PlantViewModel : ViewModelBase, IPageLifeCycleEvents
     {
-        private const string _plantSelectionPrompt = "Select or Enter plant details...";       
-        private const string _missingPlantNameMessage = "ERROR! You must a plant name...";
-        private const string _updatedPlantMessage = "Plant list updated...";
+       // private const string _plantSelectionPrompt = "Select or Enter plant details...";       
+       // private const string _missingPlantNameMessage = "You must a plant name...";
+       // private const string _updatedPlantMessage = "Plant list updated...";
 
         private readonly IPlantService _plantService;
 
@@ -26,17 +27,17 @@ namespace WhenToDig85.Models.View
             _plantService = plantService;
 
             ClearFormCallBackAction = () => { };
-            UserMessageCallBackAction = () => { };
+            UserErrorMessageCallBackAction = () => { };
 
             SavePlantCommand = new RelayCommand(async () =>
             {
-                UserMessage = _updatedPlantMessage;
+                //UserMessage = _updatedPlantMessage;
 
                 try
                 {
                     if (string.IsNullOrEmpty(_plantName))
                     {
-                        UserMessage = _missingPlantNameMessage;
+                        UserMessage = AppMessage.MissingPlantNameMessage;
                     }
                     else
                     {                       
@@ -50,7 +51,7 @@ namespace WhenToDig85.Models.View
                 }
                 finally
                 {
-                    UserMessageCallBackAction();
+                    UserErrorMessageCallBackAction();
                 }
             });
            
@@ -58,7 +59,7 @@ namespace WhenToDig85.Models.View
         }
 
         public Action ClearFormCallBackAction { get; set; }
-        public Action UserMessageCallBackAction { get; set; }
+        public Action UserErrorMessageCallBackAction { get; set; }
         
         public ICommand SavePlantCommand { get; set; }
 
@@ -70,7 +71,7 @@ namespace WhenToDig85.Models.View
             {
                 _plantSelection = value;
                 RaisePropertyChanged(() => PlantSelection);
-                if (!string.IsNullOrEmpty(_plantSelection) && _plantSelection != _plantSelectionPrompt)
+                if (!string.IsNullOrEmpty(_plantSelection) && _plantSelection != AppMessage.PlantNamePrompt)
                 {
                     Task.Run(() => GetPlantDetails(value));
                 }
@@ -152,7 +153,7 @@ namespace WhenToDig85.Models.View
             catch (Exception ex)
             {
                 UserMessage = string.Format("ERROR! {0}", ex.Message);           
-                UserMessageCallBackAction();
+                UserErrorMessageCallBackAction();
             }
         }
 
@@ -170,7 +171,7 @@ namespace WhenToDig85.Models.View
             catch (Exception ex)
             {
                 UserMessage = string.Format("ERROR! {0}", ex.Message);
-                UserMessageCallBackAction();
+                UserErrorMessageCallBackAction();
             }
 
         }
@@ -184,7 +185,7 @@ namespace WhenToDig85.Models.View
         {
             if (PlantNames != null) PlantNames.Clear();
             PlantNames = new ObservableCollection<string>(await _plantService.GetPlantNames());
-            PlantNames.Insert(0, _plantSelectionPrompt);
+            PlantNames.Insert(0, AppMessage.PlantSelectionPrompt);
             RaisePropertyChanged(() => PlantNames);
             ClearFormCallBackAction();
         }

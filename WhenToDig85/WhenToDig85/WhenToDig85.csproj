@@ -41,6 +41,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\ISQLite.cs" />
     <Compile Include="Data\Repository.cs" />
+    <Compile Include="Helpers\AppMessage.cs" />
     <Compile Include="Models\Data\Base.cs" />
     <Compile Include="Models\Data\Plant.cs" />
     <Compile Include="Locator.cs" />
