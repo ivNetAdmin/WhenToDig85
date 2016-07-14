@@ -15,6 +15,10 @@ namespace WhenToDig85
         {
             _locator = new Locator();
 
+            var nav = new NavigationService();
+            nav.Configure(Locator.PlantView, typeof(PlantView));
+            nav.Configure(Locator.VarietyView, typeof(VarietyView));
+
             // The root page of your application
             MainPage = new NavigationPage(new PlantView());
             
