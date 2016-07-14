@@ -18,6 +18,22 @@ namespace WhenToDig85.Views
             _viewModel.UserErrorMessageCallBackAction = () => DisplayUserErrorMessage(_viewModel.UserMessage);
         }
 
+        public void ClearButtonClicked(object sender, EventArgs args)
+        {
+            ClearForm();
+        }
+
+        public void Name_TextChanged(object sender, EventArgs args)
+        {
+            this.FindByName<Label>("UserMessage").Text = string.Empty;
+        }
+
+        public void Notes_TextChanged(object sender, EventArgs args)
+        {
+            var editor = (Editor)sender;
+            editor.TextColor = editor.Text == "Notes"?Color.Gray:Color.White;
+        }
+        
         protected override void OnAppearing()
         {
             ClearForm();
