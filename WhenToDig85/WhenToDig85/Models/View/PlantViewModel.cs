@@ -8,6 +8,7 @@ using System.Windows.Input;
 using WhenToDig85.Helpers;
 using WhenToDig85.Models.Data;
 using WhenToDig85.Services;
+using WhenToDig85.Views;
 
 namespace WhenToDig85.Models.View
 {
@@ -33,7 +34,7 @@ namespace WhenToDig85.Models.View
             JobCommand = new RelayCommand(async () =>{});
             ReviewCommand = new RelayCommand(async () =>{});
             PlantCommand = new RelayCommand(async () =>{});
-            VarietyCommand = new RelayCommand(async () =>{Navigation.PushAsync(new VarietyView();});
+            VarietyCommand = new RelayCommand(async () =>{Navigation.PushAsync(new VarietyView());});
 
             SavePlantCommand = new RelayCommand(async () =>
             {
