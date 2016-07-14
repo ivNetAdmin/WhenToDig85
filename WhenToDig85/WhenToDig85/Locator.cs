@@ -19,6 +19,9 @@ namespace WhenToDig85
             // Services
             SimpleIoc.Default.Register<IPlantService, PlantService>();
         }
+        
+        public const string PlantView = "PlantView";
+        public const string VarietyView = "VarietyView";
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
        "CA1822:MarkMembersAsStatic",
