@@ -33,7 +33,7 @@ namespace WhenToDig85.Views
 
         public void Navigation_Clicked(object sender, EventArgs args)
         {
-            
+            var cakes = "";
         }
 
         public void Notes_TextChanged(object sender, EventArgs args)
