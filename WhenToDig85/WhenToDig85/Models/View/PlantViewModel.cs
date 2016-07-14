@@ -1,6 +1,7 @@
 ﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -19,18 +20,22 @@ namespace WhenToDig85.Models.View
        // private const string _updatedPlantMessage = "Plant list updated...";
 
         private readonly IPlantService _plantService;
+        private readonly INavigationService _navigationService;
 
         public ObservableCollection<string> PlantNames { get; set; }
 
-        public PlantViewModel(IPlantService plantService)
+        public PlantViewModel(INavigationService navigationService, IPlantService plantService)
         {
+            if (navigationService == null) throw new ArgumentNullException("navigationService");
+            _navigationService = navigationService;
+
             if (plantService == null) throw new ArgumentNullException("plantService");
             _plantService = plantService;
 
             ClearFormCallBackAction = () => { };
             UserErrorMessageCallBackAction = () => { };
 
-            CalendaNavigationrCommand = new RelayCommand(async () =>{});
+            CalendarNavigationCommand = new RelayCommand(async () =>{});
             JobNavigationCommand = new RelayCommand(async () =>{});
             ReviewNavigationCommand = new RelayCommand(async () =>{});
             PlantNavigationCommand = new RelayCommand(async () =>{});

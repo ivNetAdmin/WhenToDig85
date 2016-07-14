@@ -1,6 +1,7 @@
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -14,14 +15,15 @@ namespace WhenToDig85.Models.View
 {
     public class VarietyViewModel : ViewModelBase, IPageLifeCycleEvents
     {
-         
-        public VarietyViewModel(IPlantService plantService)
+        private readonly INavigationService _navigationService;
+
+        public VarietyViewModel(INavigationService navigationService)
         {
-           
-            ClearFormCallBackAction = () => { };
+            _navigationService = navigationService;
+             ClearFormCallBackAction = () => { };
             UserErrorMessageCallBackAction = () => { };
 
-            CalendaNavigationrCommand = new RelayCommand(async () =>{});
+            CalendarNavigationCommand = new RelayCommand(async () =>{});
             JobNavigationCommand = new RelayCommand(async () =>{});
             ReviewNavigationCommand = new RelayCommand(async () =>{});
             PlantNavigationCommand = new RelayCommand(async () =>{_navigationService.NavigateTo(Locator.PlantView);});
@@ -32,6 +34,23 @@ namespace WhenToDig85.Models.View
 
         public Action ClearFormCallBackAction { get; set; }
         public Action UserErrorMessageCallBackAction { get; set; }
+
+        public ICommand CalendarNavigationCommand { get; set; }
+        public ICommand JobNavigationCommand { get; set; }
+        public ICommand ReviewNavigationCommand { get; set; }
+        public ICommand PlantNavigationCommand { get; set; }
+        public ICommand VarietyNavigationCommand { get; set; }
+
+        private string _userMessage;
+        public string UserMessage
+        {
+            get { return _userMessage; }
+            set
+            {
+                _userMessage = value;
+                RaisePropertyChanged(() => UserMessage);
+            }
+        }
 
         public async Task Init()
         {
