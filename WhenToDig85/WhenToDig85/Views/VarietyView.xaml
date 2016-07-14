@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WhenToDig85.Views.VarietyView">
+             x:Class="WhenToDig85.Views.VarietyView"
+             xmlns:custom="clr-namespace:WhenToDig85.Controls;assembly=WhenToDig85">
+  
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
     <ToolbarItem Icon="calendar.png" Command="{Binding CalendarNavigationCommand}" />
     <ToolbarItem Icon="job.png" Command="{Binding JobNavigationCommand}" />
