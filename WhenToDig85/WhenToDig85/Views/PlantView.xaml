@@ -5,11 +5,11 @@
              xmlns:custom="clr-namespace:WhenToDig85.Controls;assembly=WhenToDig85">
 
   <ContentPage.ToolbarItems  VerticalOptions = "Start">
-    <ToolbarItem Icon="calendar.png" Command="{Binding CalendarNavigationCommand}" />
-    <ToolbarItem Icon="job.png" Command="{Binding JobNavigationCommand}" />
-    <ToolbarItem Icon="review.png" Command="{Binding ReviewNavigationCommand}" />
-    <ToolbarItem Icon="plant.png" Command="{Binding PlantNavigationCommand}" />
-    <ToolbarItem Icon="variety.png" Command="{Binding VarietyNavigationCommand}" />
+    <ToolbarItem Icon="calendar.png" Clicked="NavigationClicked" />
+    <ToolbarItem Icon="job.png" Clicked="NavigationClicked" />
+    <ToolbarItem Icon="review.png" Clicked="NavigationClicked" />
+    <ToolbarItem Icon="plant.png" Clicked="NavigationClicked" />
+    <ToolbarItem Icon="variety.png" Clicked="NavigationClicked" />
   </ContentPage.ToolbarItems>
   
   <ContentPage.Content>
