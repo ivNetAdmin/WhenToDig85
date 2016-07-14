@@ -30,11 +30,11 @@ namespace WhenToDig85.Models.View
             ClearFormCallBackAction = () => { };
             UserErrorMessageCallBackAction = () => { };
 
-            CalendarCommand = new RelayCommand(async () =>{});
-            JobCommand = new RelayCommand(async () =>{});
-            ReviewCommand = new RelayCommand(async () =>{});
-            PlantCommand = new RelayCommand(async () =>{});
-            VarietyCommand = new RelayCommand(async () =>{Navigation.PushAsync(new VarietyView());});
+            CalendaNavigationrCommand = new RelayCommand(async () =>{});
+            JobNavigationCommand = new RelayCommand(async () =>{});
+            ReviewNavigationCommand = new RelayCommand(async () =>{});
+            PlantNavigationCommand = new RelayCommand(async () =>{});
+            VarietyNavigationCommand =new RelayCommand(() => { _navigationService.NavigateTo(Locator.VarietyView); });
 
             SavePlantCommand = new RelayCommand(async () =>
             {
@@ -66,11 +66,11 @@ namespace WhenToDig85.Models.View
         public Action ClearFormCallBackAction { get; set; }
         public Action UserErrorMessageCallBackAction { get; set; }
         
-        public ICommand CalendarCommand { get; set; }
-        public ICommand JobCommand { get; set; }
-        public ICommand ReviewCommand { get; set; }
-        public ICommand PlantCommand { get; set; }
-        public ICommand VarietyCommand { get; set; }
+        public ICommand CalendarNavigationCommand { get; set; }
+        public ICommand JobNavigationCommand { get; set; }
+        public ICommand ReviewNavigationCommand { get; set; }
+        public ICommand PlantNavigationCommand { get; set; }
+        public ICommand VarietyNavigationCommand { get; set; }
      
         public ICommand SavePlantCommand { get; set; }
      
