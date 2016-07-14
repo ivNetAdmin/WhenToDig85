@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using WhenToDig85.Models.View;
 using Xamarin.Forms;
 
 namespace WhenToDig85.Views
@@ -15,11 +11,13 @@ namespace WhenToDig85.Views
         {
             InitializeComponent();
             BindingContext = App.Locator.VarietyVM;
-            
+
+            _viewModel = (VarietyViewModel)BindingContext;
+
             _viewModel.ClearFormCallBackAction = () => ClearForm();
             _viewModel.UserErrorMessageCallBackAction = () => DisplayUserErrorMessage(_viewModel.UserMessage);
         }
-        
+
         protected override void OnAppearing()
         {
             ClearForm();
@@ -27,12 +25,12 @@ namespace WhenToDig85.Views
             Context.OnAppearing();
             base.OnAppearing();
         }
-        
+
         private IPageLifeCycleEvents Context
         {
             get { return (IPageLifeCycleEvents)BindingContext; }
         }
-        
+
         private void ClearForm()
         {
         }

@@ -20,7 +20,8 @@ namespace WhenToDig85.Models.View
         public VarietyViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-             ClearFormCallBackAction = () => { };
+
+            ClearFormCallBackAction = () => { };
             UserErrorMessageCallBackAction = () => { };
 
             //CalendarNavigationCommand = new RelayCommand(async () =>{});
