@@ -31,6 +31,11 @@ namespace WhenToDig85.Views
             this.FindByName<Label>("UserMessage").Text = string.Empty;
         }
 
+        public void Navigation_Clicked(object sender, EventArgs args)
+        {
+            
+        }
+
         public void Notes_TextChanged(object sender, EventArgs args)
         {
             var editor = (Editor)sender;
