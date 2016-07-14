@@ -13,6 +13,7 @@ namespace WhenToDig85
 
             // ViewModels
             SimpleIoc.Default.Register<PlantViewModel>();
+            SimpleIoc.Default.Register<VarietyViewModel>();
 
 
             // Services
@@ -25,6 +26,14 @@ namespace WhenToDig85
         public PlantViewModel PlantVM
         {
             get { return ServiceLocator.Current.GetInstance<PlantViewModel>(); }
+        }
+        
+         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+       "CA1822:MarkMembersAsStatic",
+       Justification = "This non-static member is needed for data binding purposes.")]
+        public VarietyViewModel VarietyVM
+        {
+            get { return ServiceLocator.Current.GetInstance<VarietyViewModel>(); }
         }
     }
 }
