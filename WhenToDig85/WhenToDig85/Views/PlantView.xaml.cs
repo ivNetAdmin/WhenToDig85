@@ -33,7 +33,22 @@ namespace WhenToDig85.Views
 
         public void Navigation_Clicked(object sender, EventArgs args)
         {
-            var cakes = "";
+            var toolbarItemIcon = ((ToolbarItem)sender).Icon;
+            toolbarItem = toolbarItemIcon.Substr(0,toolbarItemIcon.IndexOf(".")-1);
+            switch(toolbarItem)
+            {
+                case "calendar":
+                break;
+                case "job":
+                break;
+                case "review":
+                break;
+                case "plant":
+                break;
+                case "variety":
+                break;
+            }
+            
         }
 
         public void Notes_TextChanged(object sender, EventArgs args)
