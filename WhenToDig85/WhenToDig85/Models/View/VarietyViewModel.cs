@@ -15,11 +15,18 @@ namespace WhenToDig85.Models.View
 {
     public class VarietyViewModel : ViewModelBase, IPageLifeCycleEvents
     {
+        private readonly IPlantService _plantService;
         private readonly INavigationService _navigationService;
 
-        public VarietyViewModel(INavigationService navigationService)
+        public ObservableCollection<string> PlantNames { get; set; }
+
+        public VarietyViewModel(INavigationService navigationService, IPlantService plantService)
         {
+            if (navigationService == null) throw new ArgumentNullException("navigationService");
             _navigationService = navigationService;
+
+            if (plantService == null) throw new ArgumentNullException("plantService");
+            _plantService = plantService;
 
             ClearFormCallBackAction = () => { };
             UserErrorMessageCallBackAction = () => { };
@@ -42,6 +49,56 @@ namespace WhenToDig85.Models.View
         public ICommand PlantNavigationCommand { get; set; }
         public ICommand VarietyNavigationCommand { get; set; }
 
+        public ICommand SaveVarietyCommand { get; set; }
+
+        private string _plantSelection;
+        public string PlantSelection
+        {
+            get { return _plantSelection; }
+            set
+            {
+                _plantSelection = value;
+                RaisePropertyChanged(() => PlantSelection);
+                if (!string.IsNullOrEmpty(_plantSelection) && _plantSelection != AppMessage.PlantNamePrompt)
+                {
+                   // Task.Run(() => GetPlantDetails(value));
+                }
+            }
+        }
+        
+        private string _varietyName;
+        public string VarietyName
+        {
+            get { return _varietyName; }
+            set
+            {
+                _varietyName = value;
+                RaisePropertyChanged(() => VarietyName);
+            }
+        }
+        
+        private string _sowNotes;
+        public string SowNotes
+        {
+            get { return _sowNotes; }
+            set
+            {
+                _sowNotes = value;
+                RaisePropertyChanged(() => SowNotes);
+            }
+        }
+        
+        private string _harvestNotes;
+        public string HarvestNotes
+        {
+            get { return _harvestNotes; }
+            set
+            {
+                _harvestNotes = value;
+                RaisePropertyChanged(() => HarvestNotes);
+            }
+        }
+
         private string _userMessage;
         public string UserMessage
         {
@@ -57,7 +114,7 @@ namespace WhenToDig85.Models.View
         {
             try
             {
-                
+                GetPlantNames();
             }
             catch (Exception ex)
             {
@@ -70,6 +127,15 @@ namespace WhenToDig85.Models.View
         public void OnAppearing()
         {
 
+        }
+
+        private async void GetPlantNames()
+        {
+            if (PlantNames != null) PlantNames.Clear();
+            PlantNames = new ObservableCollection<string>(await _plantService.GetPlantNames());
+            PlantNames.Insert(0, AppMessage.PlantSelectionPrompt);
+            RaisePropertyChanged(() => PlantNames);
+            ClearFormCallBackAction();
         }
 
     }
