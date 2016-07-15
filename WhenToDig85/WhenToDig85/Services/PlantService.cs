@@ -51,6 +51,21 @@ namespace WhenToDig85.Services
 
             return plantNames;
         }
+        
+        public async Task<IEnumerable<string>> GetPlantVarieties(string plantName)
+        {
+            var  varietyNames = new List<string>();
+            var slug = MakeSlug(new[] { plantName });
+            var varieties = await _varietyRepository.Get<Plant>(x => x.PlantNameSlug == slug);
+
+            foreach (var variety in varieties)
+            {
+                varietyNames.Add(variety.Name));
+            }
+            varietyNames.Sort();
+
+            return varietyNames;
+        }
 
         public async Task<int> Save(string plantName, string varietyName, string sowNotes, string harvestNotes)
         {
