@@ -18,24 +18,24 @@ namespace WhenToDig85.Services
 
     public class PlantService : Base, IPlantService
     {
-        private IRepository<Plant> _plantResporitory;
+        private IRepository<Plant> _plantRepository;
 
         public PlantService()
         {
-            _plantResporitory = new Repository<Plant>();
+            _plantRepository = new Repository<Plant>();
         }
 
         public async Task<Plant> GetPlantByName(string value)
         {
             var slug = MakeSlug(new[] { value });
-            var plants = await _plantResporitory.Get<Plant>(x => x.Slug == slug);
+            var plants = await _plantRepository.Get<Plant>(x => x.Slug == slug);
             return plants.Count > 0 ? plants[0] : null;
         }
 
         public async Task<IEnumerable<string>> GetPlantNames()
         {
             var  plantNames = new List<string>();
-            var plants = await _plantResporitory.Get<Plant>();
+            var plants = await _plantRepository.Get<Plant>();
 
             foreach (var plant in plants)
             {
@@ -50,18 +50,16 @@ namespace WhenToDig85.Services
             return plantNames;
         }
 
-Task<int> Save(string plantName, string varietyName, string sowNotes, string harvestNotes);
-
-        public async Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime, string notes)
+        public async Task<int> Save(string plantName, string varietyName, string sowNotes, string harvestNotes)
         {
-            var slug = MakeSlug(new[] { plantName, plantType });
-            var plants = await _plantResporitory.Get<Plant>(x => x.Slug == slug);
+            var slug = MakeSlug(new[] { plantName });
+            var plants = await _plantRepository.Get<Plant>(x => x.Slug == slug);
             var varietyId = 0;
             if (plants.Count > 0)
             {
                 var existingPlant = plants[0];
-                
-             
+
+
             }
 
             return varietyId;
@@ -70,11 +68,11 @@ Task<int> Save(string plantName, string varietyName, string sowNotes, string har
         public async Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime, string notes)
         {
             var slug = MakeSlug(new[] { plantName, plantType });
-            var plants = await _plantResporitory.Get<Plant>(x => x.Slug == slug);
+            var plants = await _plantRepository.Get<Plant>(x => x.Slug == slug);
             var plantId = 0;
             if (plants.Count == 0)
             {
-                plantId = await _plantResporitory.Insert(new Plant
+                plantId = await _plantRepository.Insert(new Plant
                 {
                     Name = plantName,
                     Type = plantType,
@@ -90,7 +88,7 @@ Task<int> Save(string plantName, string varietyName, string sowNotes, string har
                 existingPlant.SowTime = sowTime;
                 existingPlant.HarvestTime = harvestTime;
                 existingPlant.Notes = notes;
-                plantId = await _plantResporitory.Update(existingPlant);
+                plantId = await _plantRepository.Update(existingPlant);
             }
 
             return plantId;

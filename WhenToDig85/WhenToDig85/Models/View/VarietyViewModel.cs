@@ -47,7 +47,7 @@ namespace WhenToDig85.Models.View
                     }
                     else
                     {                       
-                        await _plantService.Save(PlantName, VarietyName, SowNotes == "Notes" ? string.Empty : Notes, HarvestNotes == "Notes" ? string.Empty : Notes); 
+                        await _plantService.Save(PlantSelection, VarietyName, SowNotes == "Notes" ? string.Empty : SowNotes, HarvestNotes == "Notes" ? string.Empty : HarvestNotes); 
                         GetPlantNames();                                           
                     }
                 }
