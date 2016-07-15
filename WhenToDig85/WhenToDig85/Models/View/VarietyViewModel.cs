@@ -37,6 +37,30 @@ namespace WhenToDig85.Models.View
             PlantNavigationCommand = new RelayCommand(()=>{_navigationService.NavigateTo(Locator.PlantView);});
             //VarietyNavigationCommand =new RelayCommand(() => { });
            
+            SaveVarietyCommand = new RelayCommand(async () =>
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(_varietyName))
+                    {
+                        UserMessage = AppMessage.MissingVarietyNameMessage;
+                    }
+                    else
+                    {                       
+                        await _plantService.Save(PlantName, VarietyName, SowNotes == "Notes" ? string.Empty : Notes, HarvestNotes == "Notes" ? string.Empty : Notes); 
+                        GetPlantNames();                                           
+                    }
+                }
+                catch (Exception ex)
+                {
+                    UserMessage = string.Format("ERROR! {0}", ex.Message);
+                }
+                finally
+                {
+                    UserErrorMessageCallBackAction();
+                }
+            });
+            
             Task.Run(() => Init());
         }
 
