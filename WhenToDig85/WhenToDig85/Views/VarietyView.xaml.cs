@@ -1,4 +1,5 @@
 ﻿
+using System;
 using WhenToDig85.Models.View;
 using Xamarin.Forms;
 
@@ -31,7 +32,7 @@ namespace WhenToDig85.Views
         public void Notes_TextChanged(object sender, EventArgs args)
         {
             var editor = (Editor)sender;
-            editor.TextColor = editor.Text == "Notes"?Color.Gray:Color.White;
+            editor.TextColor = editor.Text == "Notes" ? Color.Gray : Color.White;
         }
         
         protected override void OnAppearing()
