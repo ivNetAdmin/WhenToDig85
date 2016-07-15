@@ -50,6 +50,17 @@ namespace WhenToDig85.Views
 
         private void ClearForm()
         {
+            this.FindByName<BindablePicker>("PlantNamePicker").SelectedIndex = 0;
+            this.FindByName<Entry>("PlantNameEntry").Text = string.Empty;
+            this.FindByName<Entry>("PlantTypeEntry").Text = string.Empty;
+            this.FindByName<Entry>("PlantSowEntry").Text = string.Empty;
+            this.FindByName<Entry>("PlantHarvestEntry").Text = string.Empty;
+            this.FindByName<Label>("UserMessage").Text = string.Empty;
+            this.FindByName<Editor>("Notes").Text = "Notes";
+
+            this.FindByName<Entry>("PlantNameEntry").Placeholder = AppMessage.PlantNamePrompt;
+            this.FindByName<Entry>("PlantNameEntry").PlaceholderColor = Color.Default;
+
         }
         
         private void DisplayUserErrorMessage(string userMessage)
