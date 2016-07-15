@@ -12,6 +12,7 @@ namespace WhenToDig85.Services
         //Task<IEnumerable<Plant>> GetPlantList();
         Task<IEnumerable<string>> GetPlantNames();
         Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime, string notes);
+        Task<int> Save(string plantName, string varietyName, string sowNotes, string harvestNotes);
         Task<Plant> GetPlantByName(string value);
     }
 
@@ -49,6 +50,23 @@ namespace WhenToDig85.Services
             return plantNames;
         }
 
+Task<int> Save(string plantName, string varietyName, string sowNotes, string harvestNotes);
+
+        public async Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime, string notes)
+        {
+            var slug = MakeSlug(new[] { plantName, plantType });
+            var plants = await _plantResporitory.Get<Plant>(x => x.Slug == slug);
+            var varietyId = 0;
+            if (plants.Count > 0)
+            {
+                var existingPlant = plants[0];
+                
+             
+            }
+
+            return varietyId;
+        }
+        
         public async Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime, string notes)
         {
             var slug = MakeSlug(new[] { plantName, plantType });
