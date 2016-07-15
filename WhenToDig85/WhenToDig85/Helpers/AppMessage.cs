@@ -6,6 +6,8 @@ namespace WhenToDig85.Helpers
         private const string _plantSelectionPrompt = "Select plant...";
         private const string _missingPlantNameMessage = "You must enter a plant name...";
         private const string _plantNamePrompt = "Plant name";
+        private const string _varietyNamePrompt = "Variety name";
+        
 
         public static string PlantSelectionPrompt
         {
@@ -16,6 +18,12 @@ namespace WhenToDig85.Helpers
         {
             get { return _plantNamePrompt; }
         }
+
+        public static string VarietyNamePrompt
+        {
+            get { return _varietyNamePrompt; }
+        }
+
 
         public static string MissingPlantNameMessage
         {
