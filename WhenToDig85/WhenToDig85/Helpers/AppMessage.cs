@@ -9,7 +9,6 @@ namespace WhenToDig85.Helpers
         private const string _plantNamePrompt = "Plant name";
         private const string _varietyNamePrompt = "Variety name";
         
-
         public static string PlantSelectionPrompt
         {
             get { return _plantSelectionPrompt; }
