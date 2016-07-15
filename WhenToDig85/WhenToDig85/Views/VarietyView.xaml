@@ -44,7 +44,7 @@
                SelectedItem="{Binding PlantSelection}"
               />
               <Image Source="plant_name.png" Grid.Column="0" Grid.Row="1"/>
-              <Entry x:Name="PlantNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Plant name" Text="{Binding VarietyName}" TextChanged="Name_TextChanged" />
+              <Entry x:Name="VarietyNameEntry" Grid.Column="1" Grid.Row="1"  Placeholder="Variety name" Text="{Binding VarietyName}" TextChanged="Name_TextChanged" />
               <Image Source="sow.png" Grid.Column="0" Grid.Row="2"/>
               <Editor x:Name="SowNotes" Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Text="{Binding SowNotes}" TextChanged="Notes_TextChanged"/>
               <Image Source="harvest.png" Grid.Column="0" Grid.Row="6"/>
