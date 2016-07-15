@@ -19,6 +19,7 @@ namespace WhenToDig85.Models.View
         private readonly INavigationService _navigationService;
 
         public ObservableCollection<string> PlantNames { get; set; }
+        public ObservableCollection<string> VarietyNames { get; set; }
 
         public VarietyViewModel(INavigationService navigationService, IPlantService plantService)
         {
@@ -85,7 +86,7 @@ namespace WhenToDig85.Models.View
                 RaisePropertyChanged(() => PlantSelection);
                 if (!string.IsNullOrEmpty(_plantSelection) && _plantSelection != AppMessage.PlantNamePrompt)
                 {
-                   // Task.Run(() => GetPlantDetails(value));
+                    Task.Run(() => GetVarieties(value));
                 }
             }
         }
@@ -161,6 +162,11 @@ namespace WhenToDig85.Models.View
             RaisePropertyChanged(() => PlantNames);
             ClearFormCallBackAction();
         }
+        
+        private async void GetVarieties()
+        {
+            if (VarietyNames != null) VarietyNames.Clear();
+            VarietyNames = new ObservableCollection<string>(await _plantService.GetPlantVarieties(_plantSelection));
 
     }
 }
