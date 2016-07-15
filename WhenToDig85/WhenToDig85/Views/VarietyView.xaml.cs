@@ -62,6 +62,12 @@ namespace WhenToDig85.Views
         
         private void DisplayUserErrorMessage(string userMessage)
         {
+               if (userMessage == AppMessage.MissingVarietyNameMessage)
+            {
+                this.FindByName<Entry>("VarietyNameEntry").Placeholder = userMessage;
+                this.FindByName<Entry>("VarietyNameEntry").PlaceholderColor = Color.Red;
+            }
+
         }
     }
 }
