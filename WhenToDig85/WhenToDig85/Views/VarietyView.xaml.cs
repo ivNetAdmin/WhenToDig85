@@ -1,5 +1,7 @@
 ﻿
 using System;
+using WhenToDig85.Controls;
+using WhenToDig85.Helpers;
 using WhenToDig85.Models.View;
 using Xamarin.Forms;
 
