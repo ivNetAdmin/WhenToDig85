@@ -19,10 +19,12 @@ namespace WhenToDig85.Services
     public class PlantService : Base, IPlantService
     {
         private IRepository<Plant> _plantRepository;
+        private IRepository<Variety> _varietyRepository;
 
         public PlantService()
         {
             _plantRepository = new Repository<Plant>();
+            _varietyRepository = new Repository<Variety>();
         }
 
         public async Task<Plant> GetPlantByName(string value)
@@ -58,8 +60,26 @@ namespace WhenToDig85.Services
             if (plants.Count > 0)
             {
                 var existingPlant = plants[0];
-
-
+                var varieties = await _varietyRepository.Get<Variety>(x => x.PlantNameSlug == slug  && x.Name == varietyName);
+                
+                if (varieties.Count == 0)
+                {
+                    varietyId = await _varietyRepository.Insert(new Variety
+                    {
+                        Name = varietyName,
+                        PlantName = plantName,
+                        PlantNameSlug = slug,
+                        SowNotes = sowNotes,
+                        HarvestNotes = harvestNotes
+                    });
+                }
+                else
+                {
+                    var existingVariety = varieties[0];
+                    existingVariety.SowNotes = sowNotes;
+                    existingVariety.HarvestNotes = harvestNotes;
+                    varietyId = await _varietyRepository.Update(existingVariety);
+                }
             }
 
             return varietyId;
