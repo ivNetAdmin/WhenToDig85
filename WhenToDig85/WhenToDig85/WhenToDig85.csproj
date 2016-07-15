@@ -45,6 +45,7 @@
     <Compile Include="Models\Data\Base.cs" />
     <Compile Include="Models\Data\Plant.cs" />
     <Compile Include="Locator.cs" />
+    <Compile Include="Models\Data\Variety.cs" />
     <Compile Include="Models\View\IPageLifeCycleEvents.cs" />
     <Compile Include="Models\View\VarietyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
