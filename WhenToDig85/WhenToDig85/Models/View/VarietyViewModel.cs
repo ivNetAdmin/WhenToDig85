@@ -86,7 +86,7 @@ namespace WhenToDig85.Models.View
                 RaisePropertyChanged(() => PlantSelection);
                 if (!string.IsNullOrEmpty(_plantSelection) && _plantSelection != AppMessage.PlantNamePrompt)
                 {
-                    Task.Run(() => GetVarieties(value));
+                    Task.Run(() => GetVarieties());
                 }
             }
         }
@@ -162,11 +162,11 @@ namespace WhenToDig85.Models.View
             RaisePropertyChanged(() => PlantNames);
             ClearFormCallBackAction();
         }
-        
+
         private async void GetVarieties()
         {
             if (VarietyNames != null) VarietyNames.Clear();
-            VarietyNames = new ObservableCollection<string>(await _plantService.GetPlantVarieties(_plantSelection));
-
+            VarietyNames = new ObservableCollection<string>(await _plantService.GetPlantVarietyNames(_plantSelection));
+        }
     }
 }

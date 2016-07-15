@@ -11,9 +11,11 @@ namespace WhenToDig85.Services
     {
         //Task<IEnumerable<Plant>> GetPlantList();
         Task<IEnumerable<string>> GetPlantNames();
+        Task<IEnumerable<string>> GetPlantVarietyNames(string plantName);
         Task<int> Save(string plantName, string plantType, string sowTime, string harvestTime, string notes);
         Task<int> Save(string plantName, string varietyName, string sowNotes, string harvestNotes);
         Task<Plant> GetPlantByName(string value);
+        
     }
 
     public class PlantService : Base, IPlantService
@@ -52,7 +54,7 @@ namespace WhenToDig85.Services
             return plantNames;
         }
         
-        public async Task<IEnumerable<string>> GetPlantVarieties(string plantName)
+        public async Task<IEnumerable<string>> GetPlantVarietyNames(string plantName)
         {
             var  varietyNames = new List<string>();
             var slug = MakeSlug(new[] { plantName });
@@ -60,7 +62,7 @@ namespace WhenToDig85.Services
 
             foreach (var variety in varieties)
             {
-                varietyNames.Add(variety.Name));
+                varietyNames.Add(variety.Name);
             }
             varietyNames.Sort();
 
