@@ -5,6 +5,7 @@ namespace WhenToDig85.Helpers
     {
         private const string _plantSelectionPrompt = "Select plant...";
         private const string _missingPlantNameMessage = "You must enter a plant name...";
+        private const string _missingVarietyNameMessage = "You must enter a variety name...";
         private const string _plantNamePrompt = "Plant name";
         private const string _varietyNamePrompt = "Variety name";
         
@@ -24,10 +25,14 @@ namespace WhenToDig85.Helpers
             get { return _varietyNamePrompt; }
         }
 
-
         public static string MissingPlantNameMessage
         {
             get { return _missingPlantNameMessage; }
+        }
+        
+        public static string MissingVarietyNameMessage
+        {
+            get { return _missingVarietyNameMessage; }
         }
     }
 }
