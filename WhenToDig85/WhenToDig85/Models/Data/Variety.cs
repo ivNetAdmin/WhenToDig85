@@ -7,7 +7,8 @@ namespace WhenToDig85.Models.Data
     {
         [NotNull]
         public string Name { get; set; }
-        public string PlantNameSlug { get; set; } 
+        public string PlantNameSlug { get; set; }
+        public string PlantVarietySlug { get; set; }
         public string PlantName { get; set; }
         public string SowNotes { get; set; }
         public string HarvestNotes { get; set; }

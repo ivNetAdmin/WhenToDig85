@@ -65,6 +65,23 @@
                    Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2"
                    HorizontalOptions="Center" VerticalOptions="Center"/>
           </Grid>
+
+          <ListView ItemsSource="{Binding VarietyNames}" SelectedItem="{Binding VarietySelected}" VerticalOptions = "Start">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <ViewCell>
+                  <ViewCell.View>
+                    <StackLayout Orientation="Horizontal">                     
+                      <Label Text="{Binding .}" HorizontalOptions="End" VerticalOptions="Center" />                   
+                    </StackLayout>
+                  </ViewCell.View>
+                </ViewCell>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+          
+          
+          
         </StackLayout.Children>
       </StackLayout>
     </ScrollView>

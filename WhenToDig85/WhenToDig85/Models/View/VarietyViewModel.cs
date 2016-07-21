@@ -76,6 +76,22 @@ namespace WhenToDig85.Models.View
 
         public ICommand SaveVarietyCommand { get; set; }
 
+
+        private string _varietySelected;
+        public string VarietySelected
+        {
+            get { return _varietySelected; }
+            set
+            {
+                _varietySelected = value;
+                RaisePropertyChanged(() => VarietySelected);
+                if (!string.IsNullOrEmpty(_varietySelected))
+                {
+                    Task.Run(() => GetVarietyDetail());
+                }
+            }
+        }
+
         private string _plantSelection;
         public string PlantSelection
         {
@@ -166,7 +182,17 @@ namespace WhenToDig85.Models.View
         private async void GetVarieties()
         {
             if (VarietyNames != null) VarietyNames.Clear();
+            
             VarietyNames = new ObservableCollection<string>(await _plantService.GetPlantVarietyNames(_plantSelection));
+            RaisePropertyChanged(() => VarietyNames);
         }
+
+        private async void GetVarietyDetail()
+        {
+            var variety = await _plantService.GetPlantVarietyDetails(_plantSelection, _varietySelected);
+            VarietyName = variety.Name;
+            SowNotes = variety.SowNotes;
+            HarvestNotes = variety.HarvestNotes;
+        }  
     }
 }
