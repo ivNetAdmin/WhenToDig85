@@ -60,6 +60,8 @@ namespace WhenToDig85.Views
             this.FindByName<Entry>("VarietyNameEntry").Placeholder = AppMessage.VarietyNamePrompt;
             this.FindByName<Entry>("VarietyNameEntry").PlaceholderColor = Color.Default;
 
+            this.FindByName<ListView>("VarietyNameList").SelectedItem = null;
+
         }
         
         private void DisplayUserErrorMessage(string userMessage)

@@ -175,7 +175,7 @@ namespace WhenToDig85.Models.View
             if (PlantNames != null) PlantNames.Clear();
             PlantNames = new ObservableCollection<string>(await _plantService.GetPlantNames());
             PlantNames.Insert(0, AppMessage.PlantSelectionPrompt);
-            RaisePropertyChanged(() => PlantNames);
+            RaisePropertyChanged(() => PlantNames);           
             ClearFormCallBackAction();
         }
 
@@ -184,7 +184,7 @@ namespace WhenToDig85.Models.View
             if (VarietyNames != null) VarietyNames.Clear();
             
             VarietyNames = new ObservableCollection<string>(await _plantService.GetPlantVarietyNames(_plantSelection));
-            RaisePropertyChanged(() => VarietyNames);
+            RaisePropertyChanged(() => VarietyNames);        
         }
 
         private async void GetVarietyDetail()
