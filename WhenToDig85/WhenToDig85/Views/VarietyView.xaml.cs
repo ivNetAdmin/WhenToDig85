@@ -61,7 +61,6 @@ namespace WhenToDig85.Views
             this.FindByName<Entry>("VarietyNameEntry").PlaceholderColor = Color.Default;
 
             this.FindByName<ListView>("VarietyNameList").SelectedItem = null;
-
         }
         
         private void DisplayUserErrorMessage(string userMessage)
@@ -71,7 +70,6 @@ namespace WhenToDig85.Views
                 this.FindByName<Entry>("VarietyNameEntry").Placeholder = userMessage;
                 this.FindByName<Entry>("VarietyNameEntry").PlaceholderColor = Color.Red;
             }
-
         }
     }
 }

@@ -15,13 +15,15 @@ namespace WhenToDig85
             // ViewModels
             SimpleIoc.Default.Register<PlantViewModel>();
             SimpleIoc.Default.Register<VarietyViewModel>();
+            SimpleIoc.Default.Register<JobViewModel>();
 
 
-          
+
         }
         
         public const string PlantView = "PlantView";
         public const string VarietyView = "VarietyView";
+        public const string JobView = "JobView";
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
        "CA1822:MarkMembersAsStatic",
@@ -37,6 +39,14 @@ namespace WhenToDig85
         public VarietyViewModel VarietyVM
         {
             get { return ServiceLocator.Current.GetInstance<VarietyViewModel>(); }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+     "CA1822:MarkMembersAsStatic",
+     Justification = "This non-static member is needed for data binding purposes.")]
+        public JobViewModel JobVM
+        {
+            get { return ServiceLocator.Current.GetInstance<JobViewModel>(); }
         }
     }
 }

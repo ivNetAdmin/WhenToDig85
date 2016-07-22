@@ -23,13 +23,14 @@ namespace WhenToDig85
             var nav = new NavigationService();
             nav.Configure(Locator.PlantView, typeof(PlantView));
             nav.Configure(Locator.VarietyView, typeof(VarietyView));
+            nav.Configure(Locator.JobView, typeof(JobView));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
 
             var ps = new PlantService();
             SimpleIoc.Default.Register<IPlantService>(() => ps);
 
             // The root page of your application
-            var page = new NavigationPage(new PlantView());
+            var page = new NavigationPage(new JobView());
             nav.Initialize(page);
             MainPage = page;
             

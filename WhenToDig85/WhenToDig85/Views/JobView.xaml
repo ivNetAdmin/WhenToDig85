@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WhenToDig85.Views.JobView"
+             xmlns:custom="clr-namespace:WhenToDig85.Controls;assembly=WhenToDig85">
+  
+  <ContentPage.ToolbarItems  VerticalOptions = "Start">
+    <ToolbarItem Icon="calendar.png" Command="{Binding CalendarNavigationCommand}" />
+    <ToolbarItem Icon="job.png" Command="{Binding JobNavigationCommand}" />
+    <ToolbarItem Icon="review.png" Command="{Binding ReviewNavigationCommand}" />
+    <ToolbarItem Icon="plant.png" Command="{Binding PlantNavigationCommand}" />
+    <ToolbarItem Icon="variety.png" />
+  </ContentPage.ToolbarItems>
+
+  <ContentPage.Content>
+    <ScrollView Orientation="Vertical" VerticalOptions="Start">
+      <StackLayout Padding="10" Spacing="5" VerticalOptions = "Start">
+        <StackLayout.Children>
+
+
+          <Label x:Name="UserMessage" TextColor="Red"
+                 
+                  HorizontalOptions="Center" VerticalOptions="Center"/>
+          
+        </StackLayout.Children>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+          
+  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+</ContentPage>
